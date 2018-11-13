@@ -201,9 +201,10 @@ class TasmotaService extends IPSModule
             } else {
                 $ParentKey = $this->find_parent($GesamtArray, $value);
                 $this->SendDebug('Rekursion Tasmota ' . $ParentKey . '_' . $key, "$key = $value", 0);
-                if(is_double($value)) {
-                    $key = str_replace('-', '_', $key);
-                    $this->SendDebug('String ', "$key = $value", 0);
+                if($key=='Address') {
+                    //$address = str_replace('-', '_', $key);
+                    $address = $value;
+                    $this->SendDebug('Adresse ', "$address = $value", 0);
                 }
                 if (is_int($value) or is_float($value)) {
                     $ParentKey = str_replace('-', '_', $ParentKey);
