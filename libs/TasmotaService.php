@@ -175,7 +175,24 @@ class TasmotaService extends IPSModule
         }
         return false;
     }
-
+    protected function find_address($array, $needle, $parent = null)
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $pass = $parent;
+                if (is_string($key)) {
+                    $pass = $key;
+                }
+                $found = $this->find_parent($value, $needle, $pass);
+                if ($found !== false) {
+                    return $found;
+                }
+            } elseif ($value === $needle) {
+                return $parent;
+            }
+        }
+        return false;
+    }
     protected function traverseArray($array, $GesamtArray)
     {
         foreach ($array as $key=> $value) {
@@ -187,6 +204,7 @@ class TasmotaService extends IPSModule
                 if (is_int($value) or is_float($value)) {
                     $ParentKey = str_replace('-', '_', $ParentKey);
                     $key = str_replace('-', '_', $key);
+                    $this->SendDebug('gefunden ' . $ParentKey . '_' . $key, "$key = $value", 0);
                     switch ($key) {
                         case 'Temperature':
                             $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $key, $ParentKey . ' Temperatur', '~Temperature');
