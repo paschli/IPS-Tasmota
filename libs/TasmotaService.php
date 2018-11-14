@@ -198,6 +198,7 @@ class TasmotaService extends IPSModule
         foreach ($array as $key=> $value) {
             if (is_array($value)) {
                 $address=NULL;
+                $ParentKey_Address=NULL;
                 $this->traverseArray($value, $GesamtArray);
             } else {
                 
