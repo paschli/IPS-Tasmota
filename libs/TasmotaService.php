@@ -207,6 +207,7 @@ class TasmotaService extends IPSModule
                     //$address = str_replace('-', '_', $key);
                     $address = $value;
                     $this->SendDebug('Adresse ', "$address", 0);
+                    $ParentKey_Address=$ParentKey;
                 }
                 if (is_int($value) or is_float($value)) {
                     $ParentKey = str_replace('-', '_', $ParentKey);
@@ -215,8 +216,12 @@ class TasmotaService extends IPSModule
                     
                     switch ($key) {
                         case 'Temperature':
-                            $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $address, $ParentKey . ' Temperatur', '~Temperature');
-                            SetValue($this->GetIDForIdent('Tasmota_' . $ParentKey . '_' . $address), $value);
+                            if($ParentKey==$ParentKey_Address){
+                                $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $address, $ParentKey . ' Temperatur', '~Temperature');
+                                SetValue($this->GetIDForIdent('Tasmota_' . $ParentKey . '_' . $address), $value);
+    //                            $variablenID = $this->RegisterVariableFloat($address, $ParentKey . ' Temperatur', '~Temperature');
+    //                            SetValue($this->GetIDForIdent($address), $value);
+                            }
                             break;
                         case 'Humidity':
                             $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $key, $ParentKey . ' Feuchte', '~Humidity.F');
