@@ -197,8 +197,10 @@ class TasmotaService extends IPSModule
     {
         foreach ($array as $key=> $value) {
             if (is_array($value)) {
+                $address=NULL;
                 $this->traverseArray($value, $GesamtArray);
             } else {
+                
                 $ParentKey = $this->find_parent($GesamtArray, $value);
                 $this->SendDebug('Rekursion Tasmota ' . $ParentKey . '_' . $key, "$key = $value", 0);
                 if($key=='Address') {
