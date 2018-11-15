@@ -217,6 +217,7 @@ class TasmotaService extends IPSModule
                     
                     switch ($key) {
                         case 'Temperature':
+                            if(isset($ParentKey_Address))
                             if($ParentKey==$ParentKey_Address){
                                 $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $address, $ParentKey . ' Temperatur', '~Temperature');
                                 SetValue($this->GetIDForIdent('Tasmota_' . $ParentKey . '_' . $address), $value);
