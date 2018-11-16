@@ -219,8 +219,10 @@ class TasmotaService extends IPSModule
                         case 'Temperature':
                             if(isset($ParentKey_Address))
                             if($ParentKey==$ParentKey_Address){
-                                $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $address, $ParentKey . ' Temperatur', '~Temperature');
-                                SetValue($this->GetIDForIdent('Tasmota_' . $ParentKey . '_' . $address), $value);
+//                                $variablenID = $this->RegisterVariableFloat('Tasmota_' . $ParentKey . '_' . $address, $ParentKey . ' Temperatur', '~Temperature');
+//                                SetValue($this->GetIDForIdent('Tasmota_' . $ParentKey . '_' . $address), $value);
+                                  $variablenID = $this->RegisterVariableFloat($address, $ParentKey . ' Temperatur', '~Temperature');
+                                  SetValue($this->GetIDForIdent($address), $value);
     //                            $variablenID = $this->RegisterVariableFloat($address, $ParentKey . ' Temperatur', '~Temperature');
     //                            SetValue($this->GetIDForIdent($address), $value);
                             }
